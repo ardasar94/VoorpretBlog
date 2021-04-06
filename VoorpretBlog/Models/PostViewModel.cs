@@ -6,9 +6,8 @@ using System.Web;
 
 namespace VoorpretBlog.Models
 {
-    public class Post
+    public class PostViewModel
     {
-        public int Id { get; set; }
         public string ImagePath { get; set; }
 
         [Required]
@@ -17,13 +16,5 @@ namespace VoorpretBlog.Models
         [Required]
         public string Content { get; set; }
         public List<string> Tags { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
-        [Required]
-        public string AuthorId { get; set; }
-        public virtual ApplicationUser Author { get; set; }
-        public virtual ICollection<Like> Likes { get; set; }
-
-        public DateTime? CreationDate { get; set; }
-
     }
 }

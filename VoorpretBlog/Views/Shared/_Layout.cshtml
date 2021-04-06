@@ -82,13 +82,15 @@
                 <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item px-1">
-                            <!-- Link--><a class="nav-link active" href="index.html">Home</a>
+                            <!-- Link--><!--<a class="nav-link active" href="index.html">Home</a>-->
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link active" })
                         </li>
                         <li class="nav-item px-1">
                             <!-- Link--><a class="nav-link" href="listing.html">Listing</a>
                         </li>
                         <li class="nav-item px-1">
-                            <!-- Link--><a class="nav-link" href="post.html">Post</a>
+                            <!-- Link--><!--<a class="nav-link" href="post.html">Post</a>-->
+                            @Html.ActionLink("Post", "Index", "Post", null, new { @class = "nav-link active" })
                         </li>
                         <li class="nav-item px-1 dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>

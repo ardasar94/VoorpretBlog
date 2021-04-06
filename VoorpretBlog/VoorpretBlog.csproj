@@ -175,12 +175,21 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202104051312202_Ilk.cs" />
     <Compile Include="Migrations\202104051312202_Ilk.Designer.cs">
       <DependentUpon>202104051312202_Ilk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104061354346_Second.cs" />
+    <Compile Include="Migrations\202104061354346_Second.designer.cs">
+      <DependentUpon>202104061354346_Second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104061359227_Third.cs" />
+    <Compile Include="Migrations\202104061359227_Third.designer.cs">
+      <DependentUpon>202104061359227_Third.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -189,6 +198,7 @@
     <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -459,6 +469,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -478,6 +489,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202104051312202_Ilk.resx">
       <DependentUpon>202104051312202_Ilk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104061354346_Second.resx">
+      <DependentUpon>202104061354346_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104061359227_Third.resx">
+      <DependentUpon>202104061359227_Third.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
