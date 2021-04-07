@@ -1,9 +1,54 @@
-﻿
+﻿@model List<Post>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
 
-@Html.ActionLink("New", "Index", "New");
+
+    <h2>My Posts</h2>
+    <div>
+        <a href="@Url.Action("New","Post")"><i class="fas fa-plus"></i>New Post</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image </th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Tags</th>
+                <th>Created Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="~/Images/Uploads/@item.ImagePath" alt="@item.ImagePath" width="50" height="50" /> }
+                        else
+                        {
+                            <i class="fas fa-image" style="font-size:48px; color: gray;"></i>}
+
+                    </td>
+                    <td>@item.Title</td>
+                    <td>@item.Content</td>
+                    <td>@item.Tags</td>
+                    <td>@item.CreationDate</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        <form method="post" action="@Url.Action("Delete","Post")" style="display:inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
