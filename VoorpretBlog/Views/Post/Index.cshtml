@@ -22,10 +22,12 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
+                        
                         @if (!string.IsNullOrEmpty(item.ImagePath))
                         {
                             <img src="~/Images/Uploads/@item.ImagePath" alt="@item.ImagePath" width="50" height="50" /> }
