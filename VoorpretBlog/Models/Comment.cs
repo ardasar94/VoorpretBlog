@@ -16,7 +16,7 @@ namespace VoorpretBlog.Models
         public string Content { get; set; }
         [Required]
         public Post Post { get; set; }
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
         public virtual ApplicationUser Author { get; set; }
 
     }
