@@ -1,6 +1,11 @@
 ﻿@model Post
 @{
     ViewBag.Title = "Edit";
+    var tags = "";
+    foreach (var item in ViewBag.Tags)
+    {
+        tags += item.TagName+ ",";
+    }
 }
 <div class="container">
 @using (Html.BeginForm("Edit", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -43,7 +48,13 @@
 
         <div class="form-group">
             <label>Tags</label>
-            @Html.TextBoxFor(x => x.Tags, new { @class = "form-control", required = "required", @data_role = "tagsinput" })
+            <input class="form-control sr-only" data-role="tagsinput" id="Tags" name="Tags" required="required" type="text" value="@tags">
+            @*<select multiple data-role="tagsinput" id="Tags" name="tags">
+                @foreach (var item in ViewBag.Tags)
+                {
+                    <option value="@item.TagName">@item.TagName</option>
+                }
+            </select>*@
         </div>
 
         <button class="btn btn-success">Edit</button>

@@ -16,5 +16,11 @@ namespace VoorpretBlog.Models
         public string TagName { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+
+        public override string ToString()
+        {
+
+            return TagName;
+        }
     }
 }

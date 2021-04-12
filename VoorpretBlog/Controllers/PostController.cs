@@ -20,34 +20,59 @@ namespace VoorpretBlog.Controllers
             var userId = User.Identity.GetUserId();
             var user = db.Users.FirstOrDefault(x => x.Id == userId);
 
+
             return View(user.Posts.ToList());
         }
 
 
         public ActionResult New()
         {
-            ViewBag.Tags = db.Tags.ToList();
-
+            ViewBag.Tags = new SelectList(db.Tags, "Id", "TagName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult New(PostViewModel postVm, HttpPostedFileBase image)
+        public ActionResult New(PostViewModel postVm, HttpPostedFileBase image, string[] tags)
         {
             ImageErrorChecks(image);
-            if (ModelState.IsValid)
+            if (postVm != null)
             {
                 Post post = new Post()
                 {
                     AuthorId = User.Identity.GetUserId(),
                     ImagePath = ImageUpload(image),
                     Title = postVm.Title,
-                    Tags=postVm.Tags,
+                    Tags = postVm.Tags,
                     Content = postVm.Content,
                     CreationDate = DateTime.Now
                 };
 
+                var allTags = tags[1];
+                string[] tagFinal = allTags.Split(',');
+                for (int i = 0; i < tagFinal.Length; i++)
+                {
+                    var oneTag = tagFinal[i];
+                    if (!db.Tags.Any(x => x.TagName == oneTag))
+                    {
+                        Tag addedTag = new Tag() { TagName = tagFinal[i] };
+                        db.Tags.Add(addedTag);
+                        post.Tags.Add(addedTag);
+                    }
+                    else
+                    {
+                        Tag tagAlreadyCreated = db.Tags.FirstOrDefault(x => x.TagName == oneTag);
+                        post.Tags.Add(tagAlreadyCreated);
+                    }
+                }
+                //if (Id != null)
+                //{
+                //    for (int i = 0; i < Id.Length; i++)
+                //    {
+                //        Tag tag = db.Tags.Find(Id[i]);
+                //        post.Tags.Add(tag);
+                //    }
+                //}
                 db.Posts.Add(post);
                 db.SaveChanges();
                 ViewBag.Tags = db.Tags.ToList();
@@ -81,12 +106,13 @@ namespace VoorpretBlog.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Tags = post.Tags.ToList();
             return View(post);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Post post, HttpPostedFileBase image)
+        public ActionResult Edit(Post post, HttpPostedFileBase image, string[] tags)
         {
             ImageErrorChecks(image);
 
@@ -98,11 +124,28 @@ namespace VoorpretBlog.Controllers
                     DeleteImage(post.ImagePath);
                     post.ImagePath = imagePath;
                 }
+                var allTags = tags[1];
+                string[] tagFinal = allTags.Split(',');
+                for (int i = 0; i < tagFinal.Length; i++)
+                {
+                    var oneTag = tagFinal[i];
+                    if (!db.Tags.Any(x => x.TagName == oneTag))
+                    {
+                        Tag addedTag = new Tag() { TagName = tagFinal[i] };
+                        db.Tags.Add(addedTag);
+                        post.Tags.Add(addedTag);
+                    }
+                    else
+                    {
+                        Tag tagAlreadyCreated = db.Tags.FirstOrDefault(x => x.TagName == oneTag);
+                        post.Tags.Add(tagAlreadyCreated);
+                    }
+                }
                 db.Entry(post).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
             return View(post);
         }
 

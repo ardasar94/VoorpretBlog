@@ -38,7 +38,12 @@
                     </td>
                     <td>@item.Title</td>
                     <td>@item.Content</td>
-                    <td>@item.Tags</td>
+                    <td>
+                        @foreach (var tag in item.Tags)
+                        {
+                        <span>@tag.TagName </span> 
+                        }
+                    </td>
                     <td>@item.CreationDate</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })

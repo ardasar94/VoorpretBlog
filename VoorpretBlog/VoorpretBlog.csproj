@@ -179,13 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104081318328_Ilk.cs" />
-    <Compile Include="Migrations\202104081318328_Ilk.designer.cs">
-      <DependentUpon>202104081318328_Ilk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104081409092_Second.cs" />
-    <Compile Include="Migrations\202104081409092_Second.Designer.cs">
-      <DependentUpon>202104081409092_Second.cs</DependentUpon>
+    <Compile Include="Migrations\202104121138358_First.cs" />
+    <Compile Include="Migrations\202104121138358_First.Designer.cs">
+      <DependentUpon>202104121138358_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -223,6 +219,7 @@
     <Content Include="Content\css\style.sea.min.css" />
     <Content Include="Content\css\style.violet.css" />
     <Content Include="Content\css\style.violet.min.css" />
+    <Content Include="Content\tagsinput.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
@@ -418,6 +415,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\tagsinput.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -491,11 +489,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104081318328_Ilk.resx">
-      <DependentUpon>202104081318328_Ilk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104081409092_Second.resx">
-      <DependentUpon>202104081409092_Second.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104121138358_First.resx">
+      <DependentUpon>202104121138358_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

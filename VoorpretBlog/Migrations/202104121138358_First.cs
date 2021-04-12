@@ -1,9 +1,9 @@
-﻿namespace VoorpretBlog.Migrations
+namespace VoorpretBlog.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Ilk : DbMigration
+    public partial class First : DbMigration
     {
         public override void Up()
         {
@@ -82,6 +82,7 @@
                         Content = c.String(nullable: false),
                         AuthorId = c.String(nullable: false, maxLength: 128),
                         CreationDate = c.DateTime(),
+                        TagId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.AuthorId, cascadeDelete: true)
