@@ -7,13 +7,13 @@ namespace VoorpretBlog.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Third : IMigrationMetadata
+    public sealed partial class Ilk : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Third));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Ilk));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104061359227_Third"; }
+            get { return "202104081318328_Ilk"; }
         }
         
         string IMigrationMetadata.Source

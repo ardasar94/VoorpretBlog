@@ -6,14 +6,14 @@ namespace VoorpretBlog.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Ilk : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class Second : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Ilk));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Second));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104051312202_Ilk"; }
+            get { return "202104081409092_Second"; }
         }
         
         string IMigrationMetadata.Source

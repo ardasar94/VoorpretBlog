@@ -20,6 +20,7 @@ namespace VoorpretBlog.Models
         }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
+       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -37,5 +38,6 @@ namespace VoorpretBlog.Models
         public DbSet<Like> Likes { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

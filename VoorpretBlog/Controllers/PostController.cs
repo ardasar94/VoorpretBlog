@@ -26,6 +26,7 @@ namespace VoorpretBlog.Controllers
 
         public ActionResult New()
         {
+            ViewBag.Tags = db.Tags.ToList();
 
             return View();
         }
@@ -39,19 +40,20 @@ namespace VoorpretBlog.Controllers
             {
                 Post post = new Post()
                 {
-
                     AuthorId = User.Identity.GetUserId(),
                     ImagePath = ImageUpload(image),
                     Title = postVm.Title,
+                    Tags=postVm.Tags,
                     Content = postVm.Content,
-                    Tags = postVm.Tags,
                     CreationDate = DateTime.Now
                 };
 
                 db.Posts.Add(post);
                 db.SaveChanges();
+                ViewBag.Tags = db.Tags.ToList();
                 return RedirectToAction("Index");
             }
+
 
             return View(postVm);
         }

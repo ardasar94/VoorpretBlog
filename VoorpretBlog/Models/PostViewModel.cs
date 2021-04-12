@@ -8,6 +8,10 @@ namespace VoorpretBlog.Models
 {
     public class PostViewModel
     {
+        public PostViewModel()
+        {
+            Tags = new HashSet<Tag>();
+        }
         public string ImagePath { get; set; }
 
         [Required]
@@ -15,6 +19,6 @@ namespace VoorpretBlog.Models
 
         [Required]
         public string Content { get; set; }
-        public List<string> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }
