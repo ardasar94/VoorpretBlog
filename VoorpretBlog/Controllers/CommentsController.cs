@@ -56,7 +56,7 @@ namespace VoorpretBlog.Controllers
                     Content = commentVM.Content,
                     AuthorId = User.Identity.GetUserId(),
                     CreationDate = DateTime.Now,
-                    Post = db.Posts.FirstOrDefault(x => x.Id > 0)
+                    Post = db.Posts.FirstOrDefault(x => x.Id == 4)
                 };
                 db.Comments.Add(comment);
                 db.SaveChanges();

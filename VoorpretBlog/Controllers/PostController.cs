@@ -149,6 +149,12 @@ namespace VoorpretBlog.Controllers
             return View(post);
         }
 
+        public ActionResult Detail(int id)
+        {
+            var post = db.Posts.Find(id);
+            return View(post);
+        }
+
 
         private void DeleteImage(string imagePath)
         {
