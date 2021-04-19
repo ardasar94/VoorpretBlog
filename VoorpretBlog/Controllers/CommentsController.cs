@@ -47,7 +47,7 @@ namespace VoorpretBlog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreationDate,Content,AuthorId")] CommentCreateViewModel commentVM)
+        public ActionResult Create([Bind(Include = "Content,PostId")] CommentCreateViewModel commentVM)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace VoorpretBlog.Controllers
                     Content = commentVM.Content,
                     AuthorId = User.Identity.GetUserId(),
                     CreationDate = DateTime.Now,
-                    Post = db.Posts.FirstOrDefault(x => x.Id == 4)
+                    Post = db.Posts.FirstOrDefault(x => x.Id == commentVM.PostId)
                 };
                 db.Comments.Add(comment);
                 db.SaveChanges();

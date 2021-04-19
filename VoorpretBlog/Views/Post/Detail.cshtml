@@ -44,22 +44,41 @@
                         <li class="list-inline-item mr-1 mb-3"><a class="social-link-share instagram" href="#"><i class="fab fa-instagram mr-2"></i>Share</a></li>
                     </ul>
                     <h3 class="h4 mb-4">Leave a comment</h3>
-                    <form class="mb-5" action="#">
-                        <div class="row">
-                            <div class="form-group col-lg-6">
-                                <input class="form-control" type="text" name="name" placeholder="Full Name e.g. Jason Doe">
+                    @*<form class="mb-5">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <input class="form-control" type="text" name="name" placeholder="Full Name e.g. Jason Doe">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <input class="form-control" type="email" name="email" placeholder="Email Address e.g. Jason@email.com">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <textarea class="form-control" name="message" rows="5" placeholder="Leave your message"></textarea>
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <button class="btn btn-dark" type="submit">Submit your comment</button>
+                                </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <input class="form-control" type="email" name="email" placeholder="Email Address e.g. Jason@email.com">
-                            </div>
-                            <div class="form-group col-lg-12">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Leave your message"></textarea>
-                            </div>
-                            <div class="form-group col-lg-12">
-                                <button class="btn btn-dark" type="submit">Submit your comment</button>
+                        </form>*@
+                    @using (Html.BeginForm("Create", "Comments", FormMethod.Post, new { @class = "mb-5", id = "createComment"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("PostId", Model.Id)
+                        <div class="mb-5">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <input class="form-control" type="text" disabled placeholder="@Model.Author.UserName">
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    @*@Html.TextArea("Content", "Leave your message", 10, 0, new { @class = "form-control" })*@
+                                    <textarea class="form-control" name="Content" rows="5" placeholder="Leave your message"></textarea>
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <button class="btn btn-dark" type="submit">Submit your comment</button>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    }
                     <h3 class="h4 mb-4 d-flex align-items-center"><span>Comments</span><span class="text-small ml-3 text-gray">- 3 Comments</span></h3>
                     <ul class="list-unstyled comments">
                         @foreach (var comment in Model.Comments)
@@ -227,5 +246,23 @@
     </script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>
+
+@section scripts{
+    <script>
+        $("#createComment").submit(function (e) {
+            e.preventDefault();
+            //var frm = $("#createComment");
+            var CommentCreateViewModel;
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Create", "Comments")",
+                data: $(this).serialize(),
+                success: function (data) {
+                    alert("adss");
+                }
+            })
+        })
+    </script>
+    }
 
 
