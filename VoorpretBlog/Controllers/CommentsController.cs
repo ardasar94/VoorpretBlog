@@ -36,12 +36,6 @@ namespace VoorpretBlog.Controllers
             return View(comment);
         }
 
-        // GET: Comments/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Comments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -49,21 +43,17 @@ namespace VoorpretBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Content,PostId")] CommentCreateViewModel commentVM)
         {
+            Comment comment = new Comment();
             if (ModelState.IsValid)
             {
-                Comment comment = new Comment()
-                {
-                    Content = commentVM.Content,
-                    AuthorId = User.Identity.GetUserId(),
-                    CreationDate = DateTime.Now,
-                    Post = db.Posts.FirstOrDefault(x => x.Id == commentVM.PostId)
-                };
+                comment.Content = commentVM.Content;
+                comment.AuthorId = User.Identity.GetUserId();
+                comment.CreationDate = DateTime.Now;
+                comment.Post = db.Posts.FirstOrDefault(x => x.Id == commentVM.PostId);
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-
-            return View(commentVM);
+            return Json(new { date = comment.CreationDate.ToString(), content = comment.Content, username = db.Users.Find(comment.AuthorId).UserName });
         }
 
         // GET: Comments/Edit/5

@@ -13,7 +13,7 @@ namespace VoorpretBlog.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            return View(db.Posts.OrderByDescending(x => x.CreationDate).ToList());
         }
 
     }

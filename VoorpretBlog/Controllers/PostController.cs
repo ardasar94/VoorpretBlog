@@ -152,6 +152,7 @@ namespace VoorpretBlog.Controllers
         public ActionResult Detail(int id)
         {
             var post = db.Posts.Find(id);
+            ViewBag.Posts = db.Posts.OrderByDescending(x => x.CreationDate).ToList();
             return View(post);
         }
 
