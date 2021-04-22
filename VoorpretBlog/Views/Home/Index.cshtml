@@ -1,4 +1,5 @@
-﻿@model List<Post>
+﻿@using Microsoft.AspNet.Identity;
+@model HomeViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -6,77 +7,19 @@
 <!-- Destinations -->
 <section class="pt-5">
     <div class="container">
-        <h1>Featured Destinations</h1>
-        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis aliquid</p>
+        <h1>Latest Posts</h1>
+        <p class="mb-0">Be a part of new advantures!</p>
     </div>
     <div class="destinations-slider owl-carousel owl-theme nav-center-custom owl-padding">
-        <a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-4.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Paris</p>
-                <h2 class="h3 mb-4">France</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-2.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Tokyo</p>
-                <h2 class="h3 mb-4">Japan</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-3.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Madrid</p>
-                <h2 class="h3 mb-4">Spain</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-1.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Rome</p>
-                <h2 class="h3 mb-4">Italy</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-5.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Jakarta</p>
-                <h2 class="h3 mb-4">Indonesia</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-6.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Ottawa</p>
-                <h2 class="h3 mb-4">Canada</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-7.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Cairo</p>
-                <h2 class="h3 mb-4">Egypt</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-4.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Berlin</p>
-                <h2 class="h3 mb-4">Germany</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-2.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Bangkok</p>
-                <h2 class="h3 mb-4">Thailand</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-3.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">Malé</p>
-                <h2 class="h3 mb-4">Maldives</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a><a class="destination d-flex align-items-end bg-center bg-cover" href="post.html" style="background: url(/img/travel-home-1.jpg)">
-            <div class="destination-inner w-100 text-center text-white index-forward has-transition">
-                <p class="small text-uppercase mb-0">New York</p>
-                <h2 class="h3 mb-4">United States</h2>
-                <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
-            </div>
-        </a>
+        @foreach (var post in Model.FullPosts)
+        {
+            <a class="destination d-flex align-items-end bg-center bg-cover" href="@Url.Action("Detail","Post", new { id = post.Id })" style=" background: url(/Images/Uploads/@post.ImagePath)">
+                <div class="destination-inner w-100 text-center text-white index-forward has-transition">
+                    <h2 class="h3 mb-4">@post.Title</h2>
+                    <div class="btn btn-primary btn-block destination-btn text-white">Discover</div>
+                </div>
+            </a>
+        }
     </div>
 </section>
 <!-- Divider Section -->
@@ -84,14 +27,14 @@
     <div class="container py-4">
         <!-- Home listing -->
 
-        @foreach (var post in Model)
+        @foreach (var post in Model.Posts)
         {
             <div class="row align-items-stretch bg-full-left mb-2">
                 <div class="col-lg-6 pr-lg-0 order-2 order-lg-1">
                     <div class="h-100 bg-light d-flex align-items-center">
                         <div class="py-5 pr-4 pl-3 pl-lg-0">
                             <h3 class="h4"> <a class="text-reset" href="@Url.Action("Detail","Post", new { id = post.Id })">@post.Title</a></h3>
-                            <p class="text-muted text-small mb-3"> @post.Content.Substring(0,post.Content.Length < 238 ? post.Content.Length : 238 ) ...</p>
+                            <p class="text-muted text-small mb-3"> @post.Content.Substring(0, post.Content.Length < 238 ? post.Content.Length : 238) ...</p>
                             <ul class="list-inline small text-uppercase mb-0">
                                 <li class="list-inline-item align-middle"><img class="rounded-circle shadow-sm" src="~/img/person-1.jpg" alt="" width="30" /></li>
                                 <li class="list-inline-item mr-0 text-gray align-middle">By </li>
@@ -106,6 +49,37 @@
             </div>
         }
     </div>
+    @{
+        var pi = Model.PaginationInfo;
+        int[] pageNums = WebUtilities.Pagination(pi.CurrentPage, pi.TotalPages);
+    }
+    <div>
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(pi.HasPrevious ? "" : "disabled")">
+                <a class="page-link" href="@Url.Action("Index", new { page = pi.CurrentPage-1 })" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+
+            @foreach (var i in pageNums)
+            {
+                if (i == -1)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item @(i == pi.CurrentPage ? "active": "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+            <li class="page-item @(pi.HasNext ? "" : "disabled")">
+                <a class="page-link" href="@Url.Action("Index", new { page = pi.CurrentPage+1 })">Next</a>
+            </li>
+        </ul>
+    </div>
+
 </section>
 <!-- Instagram section-->
 <section class="pb-5">
@@ -114,14 +88,13 @@
             <h2>Backpack traveler</h2>
             <p>A place for your Instagram pictures or gallery.</p>
         </header>
-        <div class="row">
-            @for (int i = 0; i < (Model.Count > 8 ? 8 : Model.Count); i++)
+        <div class="row justify-content-center">
+            @for (int i = 0; i < (Model.FullPosts.Count > 8 ? 8 : Model.FullPosts.Count); i++)
             {
-                <div class="col-lg-3 col-md-6 px-md-1 py-1">
-                    <a class="instagram-item d-block w-100 reset-anchor text-white" href="@Url.Action("Detail","Post", new { id = Model[i].Id })">
-                        <img class="img-fluid" src="~/Images/Uploads/@(Model[i].ImagePath)" alt="">
-                        <div class="instagram-item-overlay p-5">
-                            <h6>@Model[i].Title</h6>
+                <div class="owl-item active" style="width: 351.667px; margin: 1px;">
+                    <a class="destination d-flex align-items-end bg-center bg-cover" href="@Url.Action("Detail","Post", new { id = Model.FullPosts[i].Id })" style="background: url(/Images/Uploads/@(Model.FullPosts[i].ImagePath))">
+                        <div class="destination-inner w-100 text-center text-white index-forward has-transition">
+                            <h2 class="h3 mb-4">@Model.FullPosts[i].Title</h2>
                         </div>
                     </a>
                 </div>
