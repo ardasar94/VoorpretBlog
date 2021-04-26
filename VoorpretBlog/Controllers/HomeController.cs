@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,5 +17,6 @@ namespace VoorpretBlog.Controllers
             return View(db.Posts.OrderByDescending(x => x.CreationDate).ToList());
         }
 
+    
     }
 }

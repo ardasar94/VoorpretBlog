@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
@@ -187,6 +188,10 @@
     <Compile Include="Migrations\202104121340086_Second.cs" />
     <Compile Include="Migrations\202104121340086_Second.Designer.cs">
       <DependentUpon>202104121340086_Second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104261219097_post.cs" />
+    <Compile Include="Migrations\202104261219097_post.Designer.cs">
+      <DependentUpon>202104261219097_post.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -505,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104121340086_Second.resx">
       <DependentUpon>202104121340086_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104261219097_post.resx">
+      <DependentUpon>202104261219097_post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

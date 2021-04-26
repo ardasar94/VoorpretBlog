@@ -1,4 +1,5 @@
-﻿@model Post
+﻿@using Microsoft.AspNet.Identity;
+@model Post
 @{
     ViewBag.Title = "Detail";
     var PostLength = ViewBag.Posts.Count > 3 ? 3 : ViewBag.Posts.Count;
@@ -38,7 +39,24 @@
 
                         </ul>
                     </div>
+
                     <h3 class="h4 mb-4">Share this post</h3>
+                    <div class="btn-group">
+                        @{
+                            bool isFavorite = Request.IsAuthenticated && Model.Likes.Any(x => x.UserId == User.Identity.GetUserId());
+
+                        }
+                        <a href="#" class="btn btn-sm btn-outline-secondary" title="@FavTitle()" data-toggle="tooltip" data-selected="@isFavorite" data-like-id="@Model.Id">
+                            @if (isFavorite)
+                            {
+                                <i class="fas fa-heart text-danger"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-heart"></i>
+                            }
+                        </a>
+                    </div>
                     <ul class="list-inline mb-5">
                         <li class="list-inline-item mr-1 mb-3"><a class="social-link-share facebook" href="#"><i class="fab fa-facebook-f mr-2"></i>Share</a></li>
                         <li class="list-inline-item mr-1 mb-3"><a class="social-link-share twitter" href="#"><i class="fab fa-twitter mr-2"></i>Tweet</a></li>
@@ -205,6 +223,48 @@
 
 @section scripts{
     <script>
+        $('[data-like-id]').click(function (event) {
+            event.preventDefault();
+            if (@((!Request.IsAuthenticated).ToString().ToLower())) {
+                alert("Please login")
+                return;
+            }
+            var a = this;
+            var isSelected = $(a).data("selected") == "True";
+            var postId = $(a).data("like-id");
+
+            console.log(isSelected);
+            if (isSelected) {
+                $.ajax({
+                    type: "Post",
+                    url: "@Url.Action("RemoveFromFavorites", "Likes")",
+                    data: { id: postId },
+                    success: function (data) {
+                        if (data.success) {
+                            $(a).data("selected", "False");
+                            console.log("silindi");
+                            $(a).children("i").removeClass("fas text-danger").addClass("far");
+                        }
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("AddToLikes", "Likes")",
+                    data: { id: postId },
+                    success: function (data) {
+                        if (data.success) {
+                            $(a).data("selected", "True")
+                            console.log("Eklendi");
+                            $(a).children("i").addClass("fas text-danger").removeClass("far");
+                        }
+                        }
+                    });
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+
         @*$("#createComment").submit(function (e) {
             console.log("asd")
             e.preventDefault();
@@ -235,7 +295,16 @@
                 }
             })
         })
+
+
     </script>
+}
+@helper FavTitle()
+{
+    if (!User.Identity.IsAuthenticated)
+    {
+        @("Please login to add this movie to your favorites!")
+    }
 }
 
 
