@@ -11,6 +11,7 @@ using VoorpretBlog.Models;
 
 namespace VoorpretBlog.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,7 +19,9 @@ namespace VoorpretBlog.Controllers
         // GET: Comments
         public ActionResult Index()
         {
-            return View(db.Comments.ToList());
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.FirstOrDefault(x => x.Id == userId);
+            return View(user.Comments.ToList());
         }
 
         // GET: Comments/Details/5
